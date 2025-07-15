@@ -9,7 +9,7 @@ class MarketWatchPage extends StatefulWidget {
   _MarketWatchPageState createState() => _MarketWatchPageState();
 }
 
-class _MarketWatchPageState extends State<MarketWatchPage> {
+class _MarketWatchPageState extends State<MarketWatchPage> with WidgetsBindingObserver {
   final WebSocketService _service = WebSocketService();
 
   List<Stock> allStocks = [];
@@ -31,6 +31,7 @@ class _MarketWatchPageState extends State<MarketWatchPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _service.getStockStream().listen((stocks) {
       setState(() {
         allStocks = stocks;
@@ -45,8 +46,20 @@ class _MarketWatchPageState extends State<MarketWatchPage> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _service.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // App is back to foreground -> reconnect socket
+      _service.reconnect();
+    } else if (state == AppLifecycleState.paused) {
+      // Optional: Close socket to save battery
+      _service.disconnect();
+    }
   }
 
   void _toggleTheme() {
