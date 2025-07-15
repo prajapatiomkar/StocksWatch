@@ -59,22 +59,47 @@ class StockTile extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              // Buy / Sell row
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(stock.buyPrice.toStringAsFixed(2),
-                      style: TextStyle(fontSize: 16, color: Theme.of(context).textTheme.bodyLarge?.color)),
+                  Text(
+                    stock.buyPrice.toStringAsFixed(2),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                  ),
                   SizedBox(width: 8),
-                  Text(stock.sellPrice.toStringAsFixed(2),
-                      style: TextStyle(fontSize: 16, color: Theme.of(context).textTheme.bodyLarge?.color)),
+                  Text(
+                    stock.sellPrice.toStringAsFixed(2),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 4),
+              // High / Low row, indented
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('H: ${stock.high.toStringAsFixed(2)} ',
-                      style: TextStyle(fontSize: 12, color: Theme.of(context).textTheme.bodyLarge?.color)),
-                  Text('L: ${stock.low.toStringAsFixed(2)}',
-                      style: TextStyle(fontSize: 12, color: Theme.of(context).textTheme.bodyLarge?.color)),
+                  Text(
+                    'H: ${stock.high.toStringAsFixed(2)}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'L: ${stock.low.toStringAsFixed(2)}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                  ),
                 ],
               ),
             ],

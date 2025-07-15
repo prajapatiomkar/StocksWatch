@@ -76,7 +76,7 @@ class _MarketWatchPageState extends State<MarketWatchPage> with WidgetsBindingOb
         title: Text('Market Watch'),
         actions: [
           IconButton(
-            icon: Icon(Icons.nightlight_round),
+            icon: themeNotifier.value ==ThemeMode.dark ?Icon(Icons.light_mode): Icon(Icons.dark_mode),
             onPressed: _toggleTheme,
           ),
         ],
